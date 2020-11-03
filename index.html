@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation on Scroll</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="smooth-scroll-wrapper">
+        <div class="content">
+            <div class="container">
+                <h1 class="text">Harley Davidson Street Glide</h1>
+                <div class="img">
+                    <img src="one.jpg" alt="">
+                </div>
+                <p class="text">
+                    THIS IS THE RIGHT BIKE FOR: Riders seeking a slammed custom look. High-style in town and traveling the long road. Milwaukee-Eight® 107 V-Twin engine and batwing fairing.
+                </p>
+            </div>
+            <div class="container">
+                <h1 class="text">Harley Davidson Fat Boy</h1>
+                <div class="img">
+                    <img src="two.jpg" alt="">
+                </div>
+                <p class="text">
+                    THIS IS THE RIGHT BIKE FOR: Hot rod riders who like satin chrome and a steamroller stance. Commanding the road with fat tires and a squared-up headlamp. Milwaukee-Eight® 114 V-Twin engine and Lakester disc wheels
+                </p>
+            </div>
+            <div class="container">
+                <h1 class="text">Harley Davidson Breakout</h1>
+                <div class="img">
+                    <img src="three.jpg" alt="">
+                </div>
+                <p class="text">
+                    THIS IS THE RIGHT BIKE FOR: Riders looking for head-turning style and performance. Blasting through the city and block-beating passing power. Milwaukee-Eight® 114 V-Twin engine and sharp handling
+                </p>
+            </div>
+            <div class="container">
+                <h1 class="text">Harley Davidson Street Bob</h1>
+                <div class="img">
+                    <img src="four.jpg" alt="">
+                </div>
+                <p class="text">
+                    THIS IS THE RIGHT BIKE FOR: Lonewolf riders looking to create their own custom vision. Hitting the highway with spoked wheels and chopped fenders. Milwaukee-Eight® 107 V-Twin engine and Mini-Ape bars
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // var elements = $(".text, .img").toArray();
+        // $(window).scroll(function () {
+        //     elements.forEach(function (item) {
+        //         if ($(this).scrollTop() >= $(item).offset().top - 400) {
+        //             $(item).addClass("reveal");
+        //         }
+        //     });
+        // });
+        // elements.forEach(function (item) {
+        //     if ($(this).scrollTop() >= $(item).offset().top - 400) {
+        //         $(item).addClass("reveal");
+        //     }
+        // });
+        const body = document.body,
+                scrollWrap = document.getElementsByClassName("smooth-scroll-wrapper")[0],
+                height = scrollWrap.getBoundingClientRect().height - 1,
+                speed = 0.04;
+
+            var offset = 0;
+
+            body.style.height = Math.floor(height) + "px";
+
+            function smoothScroll() {
+                offset += (window.pageYOffset - offset) * speed;
+
+                var scroll = "translateY(-" + offset + "px) translateZ(0)";
+                scrollWrap.style.transform = scroll;
+
+                callScroll = requestAnimationFrame(smoothScroll);
+            }
+
+            smoothScroll();
+
+            $(function () {
+                var elements = $(".text, .img").toArray();
+                $(window).scroll(function () {
+                    elements.forEach(function (item) {
+                        if ($(this).scrollTop() >= $(item).offset().top - 400) {
+                            $(item).addClass("reveal");
+                        }
+                    });
+                });
+                elements.forEach(function (item) {
+                    if ($(this).scrollTop() >= $(item).offset().top - 400) {
+                        $(item).addClass("reveal");
+                    }
+                });
+            });
+    </script>
+</body>
+
+</html>
